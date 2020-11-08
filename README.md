@@ -50,6 +50,8 @@ Things you may want to cover:
 
 | Column         | Type       | Options                        |
 | ------         | ------     | ------------------------------ |
+| item_name      | string     | null: false                    |
+| introduction   | string     | null: false                    |
 | price          | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
 | category_id    | integer    | null: false                    |
@@ -80,7 +82,7 @@ Things you may want to cover:
 
 ### Association
 
-- has_many: addresses
+- has_one: address
 - belongs_to: user
 - belongs_to: item
 
@@ -100,6 +102,4 @@ Things you may want to cover:
 ### Association
 
 - belongs_to: buy_record
-- belongs_to: prefecture
-
 - has_many: addresses  # active hash (prefecture) に関して
