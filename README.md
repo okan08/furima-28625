@@ -57,7 +57,7 @@ Things you may want to cover:
 | category_id    | integer    | null: false                    |
 | condition_id   | integer    | null: false                    |
 | deliverypay_id | integer    | null: false                    |
-| place_id       | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
 | day_id         | integer    | null: false                    |
 
 ### Association
@@ -67,7 +67,7 @@ Things you may want to cover:
 - belongs_to: category 
 - belongs_to: condition 
 - belongs_to: deliverypay
-- belongs_to: place
+- belongs_to: prefecture
 - belongs_to: day
 
 - has_many: items    # active hash (category, condition, deliverypay, place, day)に関して
