@@ -48,10 +48,15 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column      | Type       | Options                        |
-| ------      | ------     | ------------------------------ |
-| price       | integer    | null: false                    |
-| user        | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| ------         | ------     | ------------------------------ |
+| price          | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| category_id    | integer    | null: false                    |
+| condition_id   | integer    | null: false                    |
+| deliverypay_id | integer    | null: false                    |
+| place_id       | integer    | null: false                    |
+| day_id         | integer    | null: false                    |
 
 ### Association
 
@@ -62,22 +67,9 @@ Things you may want to cover:
 - belongs_to: deliverypay
 - belongs_to: place
 - belongs_to: day
+
+- has_many: items    # active hashに関して
  
-
-## active hash
-
-| Column         | Type       | Options                        |
-| -------------- | ---------- | ------------------------------ |
-| category_id    | string     | null: false                    |
-| condition_id   | string     | null: false                    |
-| deliverypay_id | string     | null: false                    |
-| place_id       | string     | null: false                    |
-| day_id         | string     | null: false                    |
-
-### Association
-
-- has_many: items
-
 
 ## buy_records テーブル
 
@@ -95,26 +87,19 @@ Things you may want to cover:
 
 ## addresses テーブル
 
-| Column     | Type       | Options                        |
-| ------     | ---------- | ------------------------------ |
-| postnum    | string     | null: false                    |
-| city       | string     | null: false                    |
-| housenum   | string     | null: false                    |
-| building   | string     |                                |
-| tel        | string     | null: false                    |
-| buy_record | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| ------         | ---------- | ------------------------------ |
+| postnum        | string     | null: false                    |
+| city           | string     | null: false                    |
+| housenum       | string     | null: false                    |
+| building       | string     |                                |
+| tel            | string     | null: false                    |
+| buy_record     | references | null: false, foreign_key: true |
+| prefecture_id  | integer    | null: false                    |
 
 ### Association
 
 - belongs_to: buy_record
 - belongs_to: prefecture
 
-
-## active hash
-| Column         | Type       | Options             |
-| -------------- | ---------- | ------------------- |
-| prefecture_id  | string     | null: false         |
-
-### Association
-
-- has_many: addresses
+- has_many: addresses  # active hash (prefecture) に関して
