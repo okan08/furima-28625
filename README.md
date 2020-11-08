@@ -29,38 +29,55 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| nickname | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
-| realname | string | null: false |
-| furigana | string | null: false |
-| birthday | date   | null: false |
+| Column             | Type   | Options     |
+| -------------------| ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| lastname           | string | null: false |
+| firstname          | string | null: false |
+| furigana_last      | string | null: false |
+| furigana_first     | string | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :buy_records
 
+
 ## items テーブル
 
 | Column      | Type       | Options                        |
 | ------      | ------     | ------------------------------ |
-| image       | string     | null: false                    |
-| cost        | string     | null: false                    |
+| price       | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
-| category    | string     | null: false                    |
-| condition   | string     | null: false                    |
-| deliverypay | string     | null: false                    |
-| place       | string     | null: false                    |
-| day         | string     | null: false                    |
-
 
 ### Association
 
 - belongs_to: user
 - has_one : buy_record
+- belongs_to: category
+- belongs_to: condition
+- belongs_to: deliverypay
+- belongs_to: place
+- belongs_to: day
+ 
+
+## active hash
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| category_id    | string     | null: false                    |
+| condition_id   | string     | null: false                    |
+| deliverypay_id | string     | null: false                    |
+| place_id       | string     | null: false                    |
+| day_id         | string     | null: false                    |
+
+### Association
+
+- has_many: items
+
 
 ## buy_records テーブル
 
@@ -75,17 +92,29 @@ Things you may want to cover:
 - belongs_to: user
 - belongs_to: item
 
+
 ## addresses テーブル
 
-| Column     | Type       | Options     |
-| ------     | ---------- | ------------|
-| postnum    | integer    | null: false |
-| prefecture | string     | null: false |
-| city       | string     | null: false |
-| housenum   | string     | null: false |
-| building   | string     | null: true  |
-| tel        | integer    | null: false |
+| Column     | Type       | Options                        |
+| ------     | ---------- | ------------------------------ |
+| postnum    | string     | null: false                    |
+| city       | string     | null: false                    |
+| housenum   | string     | null: false                    |
+| building   | string     |                                |
+| tel        | string     | null: false                    |
+| buy_record | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to: buy_record
+- belongs_to: prefecture
+
+
+## active hash
+| Column         | Type       | Options             |
+| -------------- | ---------- | ------------------- |
+| prefecture_id  | string     | null: false         |
+
+### Association
+
+- has_many: addresses
