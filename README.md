@@ -64,13 +64,13 @@ Things you may want to cover:
 
 - belongs_to: user
 - has_one : buy_record
-- belongs_to: category
-- belongs_to: condition
+- belongs_to: category 
+- belongs_to: condition 
 - belongs_to: deliverypay
 - belongs_to: place
 - belongs_to: day
 
-- has_many: items    # active hashに関して
+- has_many: items    # active hash (category, condition, deliverypay, place, day)に関して
  
 
 ## buy_records テーブル
@@ -102,4 +102,6 @@ Things you may want to cover:
 ### Association
 
 - belongs_to: buy_record
+- belongs_to: prefecture  # (アクティブハッシュのため)
+
 - has_many: addresses  # active hash (prefecture) に関して
