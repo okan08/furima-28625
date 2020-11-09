@@ -50,7 +50,7 @@ Things you may want to cover:
 
 | Column         | Type       | Options                        |
 | ------         | ------     | ------------------------------ |
-| item_name      | string     | null: false                    |
+| name           | string     | null: false                    |
 | introduction   | text       | null: false                    |
 | price          | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
@@ -103,5 +103,3 @@ Things you may want to cover:
 
 - belongs_to: buy_record
 - belongs_to: prefecture  # (アクティブハッシュのため)
-
-- has_many: addresses  # active hash (prefecture) に関して
