@@ -4,16 +4,30 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  hankaku_eisuji = /\A(?=.&#042;?[a-z])(?=.&#042;?\d)[a-z\d]+\z/i
+  validates :email, uniqueness: true
+  #validates :password, confirmation: true, format: { with: /^(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}$/ }  #半角英数字含む６文字以上
 
-  validates :nickname, presence: true
-  validates :email, presence: true, uniqueness: true
-  #validates :password, length: { minimum: 6 }, confirmation: true #format: { with: hankaku_eisuji }
-  validates :lastname, :firstname, presence: true  # 全角(漢字・ひらがな・カタカナ)での入力指定
-  validates :furigana_last, :furigana_first, presence: true # 全角カタカナ指定
-  validates :birthday, presence: true
-  
+  with_options confirmation: true, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}\z/ } do #半角英数字含む６文字以上 
+   validates :password
+  end
 
+  with_options presence: true do
+    validates :nickname
+    validates :email
+    validates :lastname
+    validates :firstname
+    validates :furigana_last
+    validates :furigana_first
+    validates :birthday
+  end
 
+  with_options format: {with: /\A[ぁ-んァ-ン一-龥]+\z/ } do   # 全角(漢字、カタカナ、ひらがな)指定
+    validates :lastname
+    validates :firstname
+  end
 
+  with_options format: {with: /\A[ァ-ヶー－]+\z/ } do   # 全角カタカナ指定
+    validates :furigana_last
+    validates :furigana_first
+  end
 end
