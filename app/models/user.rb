@@ -1,11 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  has_one_attached :image
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   validates :email, uniqueness: true
-  # validates :password, confirmation: true, format: { with: /^(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}$/ }  #半角英数字含む６文字以上
 
   with_options confirmation: true, format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}\z/, message: 'must be both letters and numbers' } do # 半角英数字含む６文字以上
     validates :password
