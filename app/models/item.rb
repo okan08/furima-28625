@@ -12,6 +12,9 @@ class Item < ApplicationRecord
     validates :name
     validates :introduction
     validates :price
+  end
+
+  with_options numericality: { other_than: 1, message:'Select' } do
     validates :category_id
     validates :condition_id
     validates :deliverypay_id
