@@ -22,10 +22,10 @@ class Item < ApplicationRecord
     validates :day_id
   end
 
-  with_options format: { with: /\A[0-9]+\z/ } do  # 半角数字指定
+  with_options format: { with: /\A[0-9]+\z/, message: 'must be half-width number' } do  # 半角数字指定
     validates :price
   end
 
-  validates :price, numericality:{ greater_than: 299, less_than: 10000000 }
+  validates :price, numericality:{ greater_than: 299, less_than: 10000000, message: 'is out of range' }
 
 end
