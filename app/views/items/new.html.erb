@@ -9,7 +9,7 @@
     <%#= form_with local: true do |f| %>
 
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <%#= render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/error_messages', model: f.object %>
     <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
     <%# 出品画像 %>
@@ -89,6 +89,7 @@
 
     <%# 販売価格 %>
     <div class="sell-price">
+    <script src="item_price.js"></script>
       <div class="weight-bold-text question-text">
         <span>販売価格<br>(¥300〜9,999,999)</span>
         <a class="question" href="#">?</a>
@@ -102,18 +103,21 @@
           <span class="sell-yen">¥</span>
           <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
         </div>
+      
         <div class="price-content">
           <span>販売手数料 (10%)</span>
           <span>
             <span id='add-tax-price'></span>円
           </span>
         </div>
+
         <div class="price-content">
           <span>販売利益</span>
           <span>
             <span id='profit'></span>円
-        </div>
-        </span>
+          </span>
+        </div>    
+       
       </div>
     </div>
     <%# /販売価格 %>
@@ -139,9 +143,7 @@
     <%# /注意書き %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
-      <%# if user_signed_in? && current_user.id == items.user_id %>
-        <%= f.submit "出品する" ,class:"sell-btn" %>
-      <%# end %>
+      <%= f.submit "出品する" ,class:"sell-btn" %>
       <%=link_to 'もどる', root_path, class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
