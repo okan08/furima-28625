@@ -7,11 +7,14 @@ class Item < ApplicationRecord
   belongs_to :day
   belongs_to :deliverypay
   belongs_to :prefecture
+ 
+  has_one_attached :image
 
   with_options presence: true do
     validates :name
     validates :introduction
     validates :price
+    validates :image
   end
 
   with_options numericality: { other_than: 1, message:'Select' } do

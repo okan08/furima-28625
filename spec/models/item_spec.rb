@@ -11,7 +11,6 @@ RSpec.describe Item, type: :model do
       it 'Userが存在すれば出品ができる' do
         expect(@user).to be_valid
       end
-
       it 'name, introduction, price, user_id, category_id, condition_id, deliverypay_id, prefecture_id, day_idが存在すれば登録できる' do
         expect(@item).to be_valid
       end
@@ -26,6 +25,11 @@ RSpec.describe Item, type: :model do
     end
 
     context '商品出品ができない時' do
+      it '商品画像が空では出品できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end 
       it 'nameが空では登録できない' do
         @item.name = ''
         @item.valid?
@@ -46,33 +50,38 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be half-width number and between 299-10000000")
       end 
-      it 'priceが299〜10000000でなければ登録できない' do
+      it 'priceが299以下だと登録できない' do
         @item.price = 11
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be half-width number and between 299-10000000")
       end
-      it 'category_idが空では登録できない' do
-        @item.category_id = ''
+      it 'priceが10000000以上だとで登録できない' do
+        @item.price = 9999999999
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be half-width number and between 299-10000000")
+      end
+      it 'category_idが1では登録できない' do
+        @item.category_id = 1       
         @item.valid?
         expect(@item.errors.full_messages).to include("Category Select")
       end
-      it 'condition_idが空では登録できない' do
-        @item.condition_id = ''
+      it 'condition_idが1では登録できない' do
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition Select")
       end 
-      it 'deliverypay_idが空では登録できない' do
-        @item.deliverypay_id = ''
+      it 'deliverypay_idが1では登録できない' do
+        @item.deliverypay_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Deliverypay Select")
       end 
-      it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = ''
+      it 'prefecture_idが1では登録できない' do
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture Select")
       end 
-      it 'day_idが空では登録できない' do
-        @item.day_id = ''
+      it 'day_idが1では登録できない' do
+        @item.day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Day Select")
       end  
