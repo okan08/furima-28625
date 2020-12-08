@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :day
   belongs_to :deliverypay
   belongs_to :prefecture
- 
+
   has_one_attached :image
 
   with_options presence: true do
@@ -17,7 +17,7 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  with_options numericality: { other_than: 1, message:'Select' } do
+  with_options numericality: { other_than: 1, message: 'Select' } do
     validates :category_id
     validates :condition_id
     validates :deliverypay_id
@@ -29,6 +29,5 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  validates :price, numericality:{ greater_than: 299, less_than: 10000000, message: 'must be half-width number and between 299-10000000' }
-
+  validates :price, numericality: { greater_than: 299, less_than: 10_000_000, message: 'must be half-width number and between 299-10000000' }
 end

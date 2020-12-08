@@ -29,64 +29,62 @@ RSpec.describe Item, type: :model do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
-      end 
+      end
       it 'nameが空では登録できない' do
         @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
-      end 
+      end
       it 'introductionが空では登録できない' do
         @item.introduction = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Introduction can't be blank")
-      end 
+      end
       it 'priceが空では登録できない' do
         @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
-      end 
+      end
       it 'priceが半角数字で入力されていなければ登録できない' do
         @item.price = '１１１１'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be half-width number and between 299-10000000")
-      end 
+        expect(@item.errors.full_messages).to include('Price must be half-width number and between 299-10000000')
+      end
       it 'priceが299以下だと登録できない' do
         @item.price = 11
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be half-width number and between 299-10000000")
+        expect(@item.errors.full_messages).to include('Price must be half-width number and between 299-10000000')
       end
       it 'priceが10000000以上だとで登録できない' do
-        @item.price = 9999999999
+        @item.price = 9_999_999_999
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be half-width number and between 299-10000000")
+        expect(@item.errors.full_messages).to include('Price must be half-width number and between 299-10000000')
       end
       it 'category_idが1では登録できない' do
-        @item.category_id = 1       
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category Select")
+        expect(@item.errors.full_messages).to include('Category Select')
       end
       it 'condition_idが1では登録できない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition Select")
-      end 
+        expect(@item.errors.full_messages).to include('Condition Select')
+      end
       it 'deliverypay_idが1では登録できない' do
         @item.deliverypay_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Deliverypay Select")
-      end 
+        expect(@item.errors.full_messages).to include('Deliverypay Select')
+      end
       it 'prefecture_idが1では登録できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture Select")
-      end 
+        expect(@item.errors.full_messages).to include('Prefecture Select')
+      end
       it 'day_idが1では登録できない' do
         @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Day Select")
-      end  
+        expect(@item.errors.full_messages).to include('Day Select')
+      end
     end
-  end 
+  end
 end
-
-
