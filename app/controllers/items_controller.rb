@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :item_find, only: [:show, :edit, :update]
 
   def index
@@ -23,12 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if user_signed_in?
-      if current_user.id == @item.user_id
-        render :edit
-      else
-        redirect_to root_path
-      end
+    if current_user.id == @item.user_id
     else
       redirect_to root_path
     end
