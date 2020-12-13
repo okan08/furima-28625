@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @items = Item.all.order("created_at DESC") # 全てのレコードを@itemsに代入、かつ新しい順に表示
+    @items = Item.all.order('created_at DESC') # 全てのレコードを@itemsに代入、かつ新しい順に表示
   end
 
   def new
@@ -16,6 +16,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
