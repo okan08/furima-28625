@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :item_find, only: [:show, :edit, :update]
 
   def index
     @items = Item.all.order('created_at DESC') # 全てのレコードを@itemsに代入、かつ新しい順に表示
@@ -19,21 +20,30 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
+    if user_signed_in?
+      if current_user.id == @item.user_id
+        render :edit
+      else
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
   end
 
   def update
-    @item = Item.find(params[:id])
-    @item.update(item_params)
-    if @item.save
+    if @item.update(item_params)
       redirect_to item_path
     else
       render :edit
     end
+  end
+
+  def item_find
+    @item = Item.find(params[:id])
   end
 
   private
