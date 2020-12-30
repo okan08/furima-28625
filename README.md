@@ -63,7 +63,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to: user
-- has_one : buy_record
+- has_one : order
 - belongs_to: category 
 - belongs_to: condition 
 - belongs_to: deliverypay
@@ -73,7 +73,7 @@ Things you may want to cover:
 - has_many: items    # active hash (category, condition, deliverypay, place, day)に関して
  
 
-## buy_records テーブル
+## order テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
@@ -96,10 +96,10 @@ Things you may want to cover:
 | housenum       | string     | null: false                    |
 | building       | string     |                                |
 | tel            | string     | null: false                    |
-| buy_record     | references | null: false, foreign_key: true |
+| order          | references | null: false, foreign_key: true |
 | prefecture_id  | integer    | null: false                    |
 
 ### Association
 
-- belongs_to: buy_record
+- belongs_to: order
 - belongs_to: prefecture  # (アクティブハッシュのため)
