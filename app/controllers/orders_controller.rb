@@ -3,9 +3,17 @@ class OrdersController < ApplicationController
   before_action :item_find
 
   def index
-    if user_signed_in? || item.order_id.nil?
+    if user_signed_in? 
       @address_order = AddressOrder.new
     else
+      redirect_to root_path
+    end
+
+    if @item.order.present?
+      redirect_to root_path
+    end
+
+    if current_user.id == @item.user_id
       redirect_to root_path
     end
   end
@@ -24,6 +32,7 @@ class OrdersController < ApplicationController
   def item_find
     @item = Item.find(params[:item_id])
   end
+
 
   private
 
