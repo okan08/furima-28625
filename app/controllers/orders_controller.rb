@@ -29,9 +29,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def item_find
-    @item = Item.find(params[:item_id])
-  end
+  
 
 
   private
@@ -48,4 +46,9 @@ class OrdersController < ApplicationController
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
+
+  def item_find
+    @item = Item.find(params[:item_id])
+  end
+  
 end
